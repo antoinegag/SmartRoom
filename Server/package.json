@@ -9,6 +9,8 @@
   "author": "Antoine Gagnon",
   "license": "ISC",
   "dependencies": {
+    "discord.js": "^11.2.1",
+    "express": "^4.16.2",
     "serialport": "^6.0.4"
   }
 }

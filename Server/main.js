@@ -3,6 +3,8 @@ var app = express();
 
 var bodyParser = require('body-parser');
 
+var bot = require('./discord/bot');
+
 //Register routes for the lights
 var lightRoutes = require('./lights/routes');
 lightRoutes(app);
@@ -27,6 +29,4 @@ var server = app.listen(3000, function () {
 
   console.log("Server started on http://%s:%s", host, port)
 
-})
-
-
+})    
