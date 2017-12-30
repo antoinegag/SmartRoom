@@ -4,8 +4,11 @@ const client = new Discord.Client({
   disableEveryone: true
 });
 
+const config = require('./config.json');
+
+/*
 try {
-  const config = require('./config.json');
+  
 } catch (error) {
   
   console.log("Couldn't load config file, generating from blank one");
@@ -19,11 +22,14 @@ try {
   });
   
 }
+*/
 
 const commands = require('./commands');
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setStatus('online', 'Up and Ready');
+  client.user.setGame("Up and ready!");
 });
 
 client.on('message', msg => {

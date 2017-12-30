@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>SmartRoom Dashboard</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/smartroom/css/normalize.css">
+  <link rel="stylesheet" href="/smartroom/dist/css/asPieProgress.css">
+  <style type="text/css">
+
+    button {
+      border-style: solid;
+      border-color: red;
+      width: 120px;
+      height: 60px;
+      margin-bottom: 10px;
+      background-color: #181818;
+      color:white;
+    }
+    body {
+      padding: 40px;
+    }
+    .pie_progress {
+      width: 160px;
+      margin: 10px auto;
+      color:white;
+    }
+    @media all and (max-width: 768px) {
+      .pie_progress {
+        margin: 10px;
+        width: 50%;
+        max-width: 300px;
+        color:white;
+      }
+    }
+  </style>
+</head>
+<body bgcolor="#000000">
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <section>
+    <section>
+      <div class="row">
+        <div class="pie_progress" id="light" role="progressbar" style="float:left;" data-goal="33">
+          <div class="pie_progress__number">0%</div>
+          <div class="pie_progress__label">Light Level</div>
+        </div>
+        <div class="pie_progress" id="hum" role="progressbar" style="float:left;" data-goal="33">
+                <div class="pie_progress__number">0%</div>
+                <div class="pie_progress__label">Humidity</div>
+        </div>
+
+        <div class="pie_progress" id="temp" role="progressbar" style="float:left;" data-goal="-50" aria-valuemin="-273" aria-valuemax="100">
+          <div id="tempval" class="pie_progress__content" style="font-size: 42px;">Temperature</div>
+          <div class="pie_progress__label">Temperature</div>
+        </div>
+
+        <div>
+          <button id="onoff">On / Off</button><br>
+          <button style="width: 57px;" id="plus">+</button>
+          <button style="width: 57px;" id="minus">-</button><br>
+          <button id="white">White</button><br>
+          <button id="change">Color</button>
+        </div>
+      </div>
+    </section>
+  </section>
+  <script type="text/javascript" src="/smartroom/js/jquery.js"></script>
+  <script type="text/javascript" src="/smartroom/dist/jquery-asPieProgress.js"></script>
+  <script src="/smartroom/js/content.js"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function($){
+        $('.pie_progress').asPieProgress({
+            'namespace': 'pie_progress'
+        });
+    });
+    </script>
+</body>
+</html>

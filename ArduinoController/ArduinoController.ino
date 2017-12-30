@@ -21,11 +21,8 @@ const unsigned int  White[67] = {9000,4500, 550,550, 550,600, 550,550, 550,600, 
 const unsigned int  BrightPlus[67] = {9000,4500, 600,550, 550,600, 500,600, 550,600, 500,600, 550,600, 500,600, 550,600, 500,1700, 550,1700, 500,1700, 550,1700, 500,1700, 550,1700, 500,1700, 550,1700, 500,1700, 550,1700, 500,1700, 550,600, 500,600, 550,600, 550,600, 500,600, 550,600, 500,600, 550,600, 500,1700, 550,1700, 500,1700, 550,1700, 550,1650, 550};  // NEC FFE01F
 const unsigned int colorChange[67] = {8950,4500, 550,600, 500,600, 550,600, 500,600, 550,600, 500,600, 550,600, 500,600, 550,1700, 500,1700, 500,1700, 550,1700, 500,1700, 550,1700, 500,1700, 500,1700, 550,1700, 500,600, 550,600, 500,1700, 550,600, 500,600, 550,600, 500,600, 550,600, 500,1700, 500,1700, 550,600, 500,1700, 550,1700, 500,1700, 500,1700, 550};  // NEC FF906F
 const unsigned int  B_MINUS[67] = {8950,4500, 550,600, 500,600, 550,550, 550,600, 550,550, 550,600, 550,550, 550,600, 550,1700, 500,1700, 500,1700, 550,1700, 500,1700, 550,1700, 500,1700, 550,1700, 500,1700, 500,1700, 550,550, 550,600, 550,550, 550,600, 550,1700, 500,600, 550,550, 550,600, 550,1700, 500,1700, 550,1700, 500,1700, 500,600, 550,1700, 500};  // NEC FFC23D
-
 const unsigned int  hell[67] ={8950,4250,750,350,750,350,700,400,750,350,750,350,700,400,700,400,700,450,600,1600,600,1600,600,1650,550,1650,600,1600,600,1650,500,1700,550,1650,550,550,550,550,550,550,550,1700,500,600,500,550,550,600,500,600,500,1700,500,1700,550,1650,550,550,550,1700,500,1700,500,1700,550,1650,550};
-
 const unsigned int  end_d[67] = {8950,4500, 550,600, 500,600, 550,600, 500,600, 550,600, 500,600, 550,600, 500,600, 550,1650, 550,1700, 500,1700, 550,1700, 500,1700, 500,1700, 550,1700, 500,1700, 550,1700, 500,600, 550,1700, 500,1700, 500,600, 550,600, 500,600, 550,600, 500,600, 550,1700, 500,600, 550,600, 500,1700, 500,1700, 550,1700, 500,1700, 550};  // NEC FFB04F
-
 void sendNether(){irsend.sendRaw(hell, sizeof(OnOff),freq ); }
 
 void sendEnd(){irsend.sendRaw(end_d, sizeof(OnOff),freq );}
@@ -77,7 +74,7 @@ int lum_value;
 
 void setup() {
   Serial.begin(9600);
-  
+ 
   pinMode(pResistor, INPUT); //Photoresistor
   pinMode(led,OUTPUT);  //Onboard led
 
@@ -93,19 +90,14 @@ float getAnalogTemp() {
 
   //For some reason have to read twice to get an accurate reading
   val = analogRead(tempPin);
-  val = analogRead(tempPin);
-
-  //Transform into degree Cs
-  float mv = (val/1024.0)*5000; 
-  float cel = mv/10;
-  return cel;
+  return ((analogRead(tempPin)/1024.0)*5000) / 10;
 }
 
 /*
  * Return the current humidity level in %
  */
 float getHumidity() {
-  int chk = DHT.read11(DHT11_PIN);
+  DHT.read11(DHT11_PIN);
   return DHT.humidity;
 }
 
@@ -114,15 +106,14 @@ float getHumidity() {
  */
 int getLightLevel() {
   lum_value = analogRead(pResistor);
-  lum_value = analogRead(pResistor);
-  return lum_value;
+  return analogRead(pResistor);;
 }
 
 /*
  * Returns unexact temperature reading
  */
 float getTemp() {
-  int chk = DHT.read11(DHT11_PIN);
+  DHT.read11(DHT11_PIN);
   return DHT.temperature;
 }
 
@@ -131,15 +122,14 @@ float getTemp() {
  * Formatted into a json array
  */
 void sendData() {
-  String val;
-  val = "[" + String(getTemp()) + ""","  + String(getAnalogTemp()) + ""","+ String(getLightLevel()) + ""","+ String(getHumidity()) + """]";
   digitalWrite(led,HIGH);
-  Serial.print(val);
+  Serial.print("[" + String(getTemp()) + ""","  + String(getAnalogTemp()) + ""","+ String(getLightLevel()) + ""","+ String(getHumidity()) + """]");
   digitalWrite(led,LOW);
 }
 
 void loop()
 {
+  
 }
 
 
@@ -151,7 +141,6 @@ void serialEvent() {
   while (Serial.available()) {
     // get the new byte:
     char inChar = (char)Serial.read();
-    
     if(inChar == 'P') 
       sendBrightPlus();
     else if (inChar == 'M')

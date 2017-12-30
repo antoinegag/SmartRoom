@@ -1,5 +1,3 @@
-Server/html
-
 # Logs
 logs
 *.log
@@ -60,3 +58,4 @@ typings/
 .env
 
 Server/discord/config.json
+.vscode/*
