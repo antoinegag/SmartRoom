@@ -14,14 +14,17 @@ function send(action) {
 }
 
 function update() {
-    if(document.hasFocus()) {
-        $.get("http://pokepi/smartroom/api/sensors/getSensorData", function(data, status){    
-            $("#light").asPieProgress('go', data["lightLevel"]/5.3);
-            $("#hum").asPieProgress('go', data["humidity"]);
-            $("#tempval").html(Math.trunc(data["analogTemperature"]) + '&#176;C');
-            $("#temp").asPieProgress('go', data["analogTemperature"]);
-        });
-    }
-
+    $.get("http://pokepi/smartroom/api/sensors/getSensorData", function(data, status){    
+        $("#light").asPieProgress('go', data["lightLevel"]/10);
+        $("#hum").asPieProgress('go', data["humidity"]);
+        $("#tempval").html(Math.trunc(data["analogTemperature"]) + '&#176;C');
+        $("#temp").asPieProgress('go', data["analogTemperature"]);
+    });
     setTimeout(update, 1000);
 }
+
+jQuery(document).ready(function($){
+    $('.pie_progress').asPieProgress({
+        'namespace': 'pie_progress'
+    });
+});

@@ -24,7 +24,7 @@ function sendData(msg, client) {
     serial.query((data) => {
         try {
             var dataJson = JSON.parse(data); 
-            var desc = "Temperature: " + dataJson[1] + "°C\nLight Level: " + dataJson[2]/10 + "%\nHumidity: " + dataJson[3] + "%";
+            var desc = "Temperature: " + dataJson[1] + "°C\nLight Level: " + dataJson[2]/5.3 + "%\nHumidity: " + dataJson[3] + "%";
         } catch (error) {
             var desc = "Error";
         }

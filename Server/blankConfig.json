@@ -1,0 +1,15 @@
+{
+    "listen_on" : {
+        "interface" : "eth0",
+        "port" : 80,
+        "reroute": false
+    },
+    "api": {
+        "active": true,
+        "sensors": true,
+        "lights": true
+    },
+    "serve_static": true,
+    "static_path" : "html",
+    "discord": true
+}

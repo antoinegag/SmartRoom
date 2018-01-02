@@ -1,23 +1,71 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html class="no-js">
 <head>
-	<script src="jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>SmartRoom Dashboard</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="dist/css/asPieProgress.css">
+  <style type="text/css">
+
+    button {
+      border-style: solid;
+      border-color: red;
+      width: 240px;
+      height: 60px;
+      margin-bottom: 10px;
+      background-color: #181818;
+      color:white;
+    }
+    body {
+      padding: 20px;
+    }
+    .pie_progress {
+      width: 300px;
+      margin: 50px auto;
+      color:white;
+    }
+    }
+  </style>
 </head>
+<body bgcolor="#000000">
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <section>
+    <section>
+      <center>
+      <div class="row">
 
-<body>
-	<div id="temp" class="text">Temperature:</div>
-	<div id="hum" class="text">Humidity:</div>
-	<div id="light" class="text">Light Level:</div>
-	<center>
-		<button class="button" style="width: 400px" id="onoff">On/Off</button><br>
-		<button class="button" id="b_minus">Brightness -</button>
-		<button class="button" id="b_plus">Brightness +</button><br>
-		<button class="button" id="ww">White Light</button>
-		<button class="button" id="c_color">Change Color</button>	
-	</center>
-	<script src="api_request.js"></script>
+          <div>
+              <button id="onoff">On / Off</button><br>
+              <button style="width: 114px;margin-right:10px;" id="plus">+</button>
+              <button style="width: 114px;" id="minus">-</button><br>
+              <button id="white">White</button><br>
+              <button id="change">Color</button>
+            </div>
+
+        <div class="pie_progress" id="light" role="progressbar" style="float: left;" data-goal="33">
+          <div class="pie_progress__number">0%</div>
+          <div class="pie_progress__label">Light Level</div>
+        </div>
+        <div class="pie_progress" id="hum" role="progressbar" style="float: left;" data-goal="33">
+                <div class="pie_progress__number">0%</div>
+                <div class="pie_progress__label">Humidity</div>
+        </div>
+
+        <div class="pie_progress" id="temp" role="progressbar" style="float: left;" data-goal="-50" aria-valuemin="-273" aria-valuemax="100">
+          <div id="tempval" class="pie_progress__content" style="font-size: 42px;">Temperature</div>
+          <div class="pie_progress__label">Temperature</div>
+        </div>
+      </div>
+    </section>
+  </center>
+  </section>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="dist/jquery-asPieProgress.js"></script>
+  <script src="js/content.js"></script>
 </body>
-
 </html>

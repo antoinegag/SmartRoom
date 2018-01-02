@@ -4,25 +4,19 @@ const client = new Discord.Client({
   disableEveryone: true
 });
 
-const config = require('./config.json');
+var config;
 
-/*
 try {
-  
+  config = require('./config.json');  
 } catch (error) {
   
   console.log("Couldn't load config file, generating from blank one");
-  
-  fs.readFile('blankConfig.json', 'utf8', function (err,data) {
-    if (err) {
-      return console.log(err);
-    }
-    fs.writeFile('config.json', data, 'utf8');
-    console.log("Config file generated!");
-  });
-  
-}
-*/
+  var data = fs.readFileSync('blankConfig.json', 'utf8');
+  fs.writeFileSync('config.json', data,'utf8');
+  console.log("Generated config file for discord");
+  console.log("Update it and relaunch!");
+  process.exit();
+};
 
 const commands = require('./commands');
 
