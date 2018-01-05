@@ -1,5 +1,6 @@
 var fs = require('fs');
 const Discord = require("discord.js");
+
 const client = new Discord.Client({
   disableEveryone: true
 });
@@ -21,7 +22,7 @@ try {
 const commands = require('./commands');
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Discord bot online as ${client.user.tag}!`);
   client.user.setStatus('online', 'Up and Ready');
   client.user.setGame("Up and ready!");
 });
