@@ -11,5 +11,6 @@
     },
     "serve_static": true,
     "static_path" : "html",
-    "discord": true
+    "discord": true,
+    "stream" : true
 }

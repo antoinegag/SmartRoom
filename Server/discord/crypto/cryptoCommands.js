@@ -40,9 +40,12 @@ sendCryptVal: (msg, client) => {
 },
 
 tellValue: (msg, client) => {
-    axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=XLM,BTC,ETH&tsyms=USD,CAD')
+    var params = msg.content.split(' ');
+    params.shift();
+    params.shift();
+    axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=' + params[0] + '&tsyms=USD,CAD')
     .then(response => {
-        msg.channel.send("XLM " + response.data.XLM.CAD.toString() + " CAD", {tts : true});
+        msg.channel.send(params[0] + " " + response.data.XLM.CAD.toString() + " CAD", {tts : true});
     });
 },
 
@@ -65,6 +68,10 @@ sendMarket: (msg, client) => {
             {
                 name: "remove VALUE",
                 value: "removes VALUE from market list"
+            },
+            {
+                name: "dump",
+                value: "list all the currencies on the market"
             }
         ]
 
@@ -73,7 +80,7 @@ sendMarket: (msg, client) => {
                     title: 'Market Help',
                     color: 3447003,
                     description: "Help for command Market",
-                    fields: body,
+                    fields: body
                 }
         });
         return;
@@ -111,6 +118,11 @@ sendMarket: (msg, client) => {
         return;
     }
 
+    if(params[0] === "dump") {
+        msg.channel.send("```json\n" + JSON.stringify(data.subscribe, null, 2) + "```");
+        return;
+    }
+
     axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=' + data.subscribe.join(',') + '&tsyms=USD,CAD')
     .then(response => {
 
@@ -123,7 +135,7 @@ sendMarket: (msg, client) => {
                     value: "CAD: " + response.data[data.subscribe[i]].CAD.toString() + "\nUSD: " + response.data[data.subscribe[i]].USD.toString()
                 })
             } catch (error) {
-                log(error);
+                console.log(error);
             }
         }
 

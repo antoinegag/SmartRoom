@@ -12,6 +12,8 @@
     "discord.js": "^11.2.1",
     "express": "^4.16.2",
     "node-cmd": "^3.0.0",
-    "serialport": "^6.0.4"
+    "raspicam": "^0.2.14",
+    "serialport": "^6.0.4",
+    "socket.io": "^2.0.4"
   }
 }

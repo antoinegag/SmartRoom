@@ -19,7 +19,9 @@ module.exports = {
         try {
             commandRegistry[command[1]](msg, client);
         } catch (error) {
-            msg.channel.send("Error with command" + command[1]);
+            msg.channel.send("Error with command " + command[1]);
+            console.log("Error with " + command);
+            console.log(error);
         }
         if(typeof callback === "function") callback();
     }

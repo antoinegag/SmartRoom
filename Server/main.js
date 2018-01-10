@@ -18,11 +18,11 @@ try {
   process.exit();
 };
 
-var express
-var app
-var bodyParser
+var express;
+var app;
+var bodyParser;
 
-if(config.serve_static || config.api.active) {
+if(config.stream || config.serve_static || config.api.active) {
   
   express = require('express');
   app = express();
@@ -72,3 +72,5 @@ if(config.serve_static || config.api.active) {
 if(config.discord) {
   var bot = require('./discord/bot');
 }
+
+
