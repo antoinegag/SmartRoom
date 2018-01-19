@@ -48,6 +48,12 @@ if(config.stream || config.serve_static || config.api.active) {
 
     app.use(bodyParser.json());
 
+    //Register routes for historical data
+    console.log("Registering historic routes");
+    var historicRoutes = require('./database/routes');
+    historicRoutes(app);
+
+
     if(config.api.sensors) {
       //Register routes for the sensors
       console.log("Registering sensor routes");

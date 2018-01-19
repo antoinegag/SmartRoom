@@ -1,0 +1,75 @@
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <div id="temp"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <div id="light"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <script>
+
+    $.get("http://pokepi/smartroom/api/historic/temperature", function(data, status) {   
+      var xD = [];
+      var yV = [];
+
+      for(var k in data) {
+        xD.push(data[k].date);
+        yV.push(data[k].value);  
+      }
+
+      var temp = {
+        x: xD,
+        y: yV,
+        mode: 'lines',
+        name: 'Lines',
+      };
+
+      var data = [temp];
+
+      var layout = {
+        title: 'Room Temperature',
+        xaxis: {
+          title: 'Time'
+        },
+        yaxis: {
+          title: 'Temperature (°C)'
+        }
+      };
+
+      Plotly.newPlot('temp', data, layout);
+    });
+
+    $.get("http://pokepi/smartroom/api/historic/light", function(data, status) {   
+      var xD = [];
+      var yV = [];
+
+      for(var k in data) {
+        xD.push(data[k].date);
+        yV.push(Math.trunc(data[k].value/5.3));  
+      }
+
+      var temp = {
+        x: xD,
+        y: yV,
+        mode: 'lines',
+        name: 'Lines',
+      };
+
+      var data = [temp];
+
+      var layout = {
+        title: 'Room light level',
+        xaxis: {
+          title: 'Time'
+        },
+        yaxis: {
+          title: 'Light Level (%)'
+        }
+      };
+
+      Plotly.newPlot('light', data, layout);
+    });
+  </script>
+</body>

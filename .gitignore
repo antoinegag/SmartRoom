@@ -60,3 +60,4 @@ typings/
 Server/discord/config.json
 .vscode/*
 Server/config.json
+Server/database/config.json
