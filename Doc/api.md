@@ -104,3 +104,45 @@
   * **Code:** 400 BAD REQUEST <br />
     **Content:** `{"message" : "error" }`
 
+----
+# **Historical data**
+## light | temperature
+
+  Returns an array with all historical data from the lights | temperature
+
+* **URL**
+
+  /smartroom/api/historic/light|temperature
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params** 
+
+   None
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br/>
+    **Content:** 
+    ```json
+    [
+      {
+      "date": "2018-01-19 19:00:00",
+      "value": "342"
+      },
+      {
+      "date": "2018-01-19 19:30:00",
+      "value": "342"
+      },
+      {
+      "date": "2018-01-19 20:00:00",
+      "value": "217"
+      }
+    ]
+    ```
