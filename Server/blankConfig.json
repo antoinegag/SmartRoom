@@ -11,6 +11,20 @@
     },
     "serve_static": true,
     "static_path" : "html",
-    "discord": true,
-    "stream" : true
+    "stream" : true,
+
+    "database" : {
+        "host": "localhost",
+        "user": "smartroom",
+        "password": "bar",
+        "db": "room_data",
+        "port": 3306
+    },
+
+    "discord" : {
+        "enabled" : true,
+        "token" : "TOKEN HERE",
+        "key" : "!key",
+        "pignable" : true
+    }
 }

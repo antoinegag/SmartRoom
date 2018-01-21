@@ -1,23 +1,10 @@
 var fs = require('fs');
 const Discord = require("discord.js");
+var config = require("../util/configHandler");
 
 const client = new Discord.Client({
   disableEveryone: true
 });
-
-var config;
-
-try {
-  config = require('./config.json');  
-} catch (error) {
-  
-  console.log("Couldn't load config file, generating from blank one");
-  var data = fs.readFileSync('blankConfig.json', 'utf8');
-  fs.writeFileSync('config.json', data,'utf8');
-  console.log("Generated config file for discord");
-  console.log("Update it and relaunch!");
-  process.exit();
-};
 
 const commands = require('./commands');
 
@@ -28,9 +15,9 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if (msg.content.startsWith(config["key"]) || (msg.content.startsWith('<@396401258988175360>') && config["pignable"])) {
+  if (msg.content.startsWith(config.discord.key) || (msg.content.startsWith('<@396401258988175360>') && config.discord.pignable)) {
     commands.handle(msg, client);
   }
 });
 
-client.login(config['token']);
+client.login(config.discord.token);

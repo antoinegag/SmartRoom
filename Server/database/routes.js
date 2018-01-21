@@ -3,21 +3,8 @@ var schedule = require('node-schedule');
 
 var serial = require('../sensors/serial');
 var lights = require('../lights/lights');
- 
-var config;
-const axios = require('axios');
 
-try {
-  config = require('./config.json');  
-} catch (error) {
-  
-  console.log("Couldn't load config file, generating from blank one");
-  var data = fs.readFileSync('blankConfig.json', 'utf8');
-  fs.writeFileSync('config.json', data,'utf8');
-  console.log("Generated config file for database");
-  console.log("Update it and relaunch!");
-  process.exit();
-};
+var config = require('../util/configHandler');
 
 //Task that runs every hour (when minute is 0)
 var j = schedule.scheduleJob('*/30 * * * *', function() {
@@ -35,7 +22,7 @@ var j = schedule.scheduleJob('*/30 * * * *', function() {
         }
 
         try {
-            var c = new Client(config);
+            var c = new Client(config.database);
         } catch (error) {
             console.log("Error creating new client");
             console.log(error);
@@ -69,7 +56,7 @@ module.exports = function(app) {
 
 function sendHistoric(table, req, res) {
     try {
-        var c = new Client(config);
+        var c = new Client(config.database);
         
         c.query('SELECT * FROM ' + table, function(err, rows) {
             if (err)

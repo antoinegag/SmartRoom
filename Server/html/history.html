@@ -4,10 +4,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<body>
-
+<body bgcolor="#000000">
+  
   <div id="temp"><!-- Plotly chart will be drawn inside this DIV --></div>
   <div id="light"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <img align="right" src="./assets/poketech_w.png" />
   <script>
 
     $.get("http://pokepi/smartroom/api/historic/temperature", function(data, status) {   
@@ -24,17 +25,47 @@
         y: yV,
         mode: 'lines',
         name: 'Lines',
+        line: {
+          color: 'rgb(198, 55, 205)',
+          width: 3
+        },
+        font: {
+          family: 'Arial',
+          size: 14,
+          color: 'rgba(255,255,2255,1)'
+        },
       };
 
       var data = [temp];
 
       var layout = {
         title: 'Room Temperature',
+        titlefont: {
+          color: 'white'
+        },
+        paper_bgcolor: 'rgba(0,0,0,1)',
+        plot_bgcolor: 'rgba(0,0,0,1)',
         xaxis: {
-          title: 'Time'
+          gridcolor: "#4d4d4d",
+          tickfont: {
+            color: 'white'
+          },
+          titlefont: {
+            color: 'white'
+          },   
+          title: 'Time',
+          tickcolor: '#FFF'
         },
         yaxis: {
-          title: 'Temperature (°C)'
+          gridcolor: "#4d4d4d",
+          tickfont: {
+            color: 'white'
+          },
+          titlefont: {
+            color: 'white'
+          },       
+          title: 'Temperature (°C)',
+          tickcolor: '#FFF'
         }
       };
 
@@ -55,17 +86,47 @@
         y: yV,
         mode: 'lines',
         name: 'Lines',
+        line: {
+          color: 'rgb(198, 55, 205)',
+          width: 3
+        },
+        font: {
+          family: 'Arial',
+          size: 14,
+          color: 'rgba(255,255,225,1)'
+        }
       };
 
       var data = [temp];
 
       var layout = {
         title: 'Room light level',
+        titlefont: {
+          color: 'white'
+        },
+        paper_bgcolor: 'rgba(0,0,0,1)',
+        plot_bgcolor: 'rgba(0,0,0,1)',
         xaxis: {
-          title: 'Time'
+          gridcolor: "#4d4d4d",
+          tickfont: {
+            color: 'white'
+          },
+          titlefont: {
+            color: 'white'
+          },  
+          title: 'Time',
+          tickcolor: '#FFF'
         },
         yaxis: {
-          title: 'Light Level (%)'
+          gridcolor: "#4d4d4d",
+          tickfont: {
+            color: 'white'
+          },
+          titlefont: {
+            color: 'white'
+          }, 
+          title: 'Light Level (%)',
+          tickcolor: '#FFF'
         }
       };
 
