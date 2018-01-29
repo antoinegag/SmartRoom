@@ -2,6 +2,7 @@ var serial = require('../sensors/serial');
 var lights = require('../lights/lights');
 var crypto = require('./crypto/cryptoCommands');
 const axios = require('axios');
+var RaspiCam = require("raspicam");
 
 var commandRegistry = {
     'help' : (msg, client) => { sendHelp(msg, client) },
@@ -9,7 +10,8 @@ var commandRegistry = {
     'lights' : (msg, client) => { sendLightRemote(msg, client) },
     'val' : (msg, client) => { crypto.sendCryptVal(msg, client) },
     'market' : (msg, client) => { crypto.sendMarket(msg, client) },
-    'tell': (msg, client) => {  crypto.tellValue(msg, client) }
+    'tell': (msg, client) => {  crypto.tellValue(msg, client) },
+    'printer' : (msg, client) => { sendPrinter(msg,client) }
 };
 
 module.exports = {
@@ -98,3 +100,30 @@ function sendLightRemote(msg, client) {
         msg.react("⏯");
     });
 };
+
+function sendPrinter(msg, client) {
+
+    //str.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+    var camera = new RaspiCam({
+        mode: "photo",
+        output: "./pictures/cam.jpg",
+        encoding: "jpg",
+        timeout: 0, // take the picture immediately
+        hf: true,
+        vf: true,
+        h:2304,
+        w:3456
+    });
+    
+    camera.on("read", function( err, timestamp, filename ){
+        msg.channel.send(``, {
+            files: [
+              "./pictures/cam.jpg"
+            ]
+          });
+          camera.stop();
+    });
+    
+    camera.start();
+}

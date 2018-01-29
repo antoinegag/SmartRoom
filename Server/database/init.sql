@@ -15,3 +15,10 @@ CREATE TABLE IF NOT EXISTS `light` (
 	`value` int(7),
 	PRIMARY KEY( `date` )
 );
+
+CREATE TABLE IF NOT EXISTS `log` (
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`date` datetime DEFAULT CURRENT_TIMESTAMP,
+	`level` varchar(255) DEFAULT "NONE",
+	`msg` varchar(255)
+);

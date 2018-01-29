@@ -1,3 +1,5 @@
+var logger = require("../util/logging");
+
 var fs = require('fs');
 const Discord = require("discord.js");
 var config = require("../util/configHandler");
@@ -20,4 +22,7 @@ client.on('message', msg => {
   }
 });
 
-client.login(config.discord.token);
+client.login(config.discord.token).catch((error) => {
+  console.log(error);
+  logger.log("ERROR", "Discord bot failed");
+});

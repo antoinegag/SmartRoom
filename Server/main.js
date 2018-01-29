@@ -67,4 +67,6 @@ if(config.discord) {
   var bot = require('./discord/bot');
 }
 
+require("./util/logging").log("INFO", "SmartRoom Started");
+
 
