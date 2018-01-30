@@ -26,5 +26,12 @@
         "token" : "TOKEN HERE",
         "key" : "!key",
         "pignable" : true
+    },
+
+    "perms" : {
+        "admin" : [
+            123955881116172288,
+            181204250024607744
+        ]
     }
 }

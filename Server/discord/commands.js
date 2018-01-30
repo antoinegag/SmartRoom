@@ -3,6 +3,7 @@ var lights = require('../lights/lights');
 var crypto = require('./crypto/cryptoCommands');
 const axios = require('axios');
 var RaspiCam = require("raspicam");
+var config = require("../util/configHandler");
 
 var commandRegistry = {
     'help' : (msg, client) => { sendHelp(msg, client) },
@@ -11,7 +12,8 @@ var commandRegistry = {
     'val' : (msg, client) => { crypto.sendCryptVal(msg, client) },
     'market' : (msg, client) => { crypto.sendMarket(msg, client) },
     'tell': (msg, client) => {  crypto.tellValue(msg, client) },
-    'printer' : (msg, client) => { sendPrinter(msg,client) }
+    'printer' : (msg, client) => { sendPrinter(msg,client) },
+    'light' : (msg, client) => { setLight(msg, client)}
 };
 
 module.exports = {
@@ -105,6 +107,12 @@ function sendPrinter(msg, client) {
 
     //str.replace(/[^a-z0-9]/gi, '_').toLowerCase();
 
+    if(!config.perms.admin.includes(msg.author.id)) {
+        msg.channel.send("You don't have the require permissions do execute that command.");
+        return;
+    }
+
+    msg.channel.startTyping();
     var camera = new RaspiCam({
         mode: "photo",
         output: "./pictures/cam.jpg",
@@ -117,6 +125,7 @@ function sendPrinter(msg, client) {
     });
     
     camera.on("read", function( err, timestamp, filename ){
+        msg.channel.stopTyping();
         msg.channel.send(``, {
             files: [
               "./pictures/cam.jpg"
@@ -126,4 +135,79 @@ function sendPrinter(msg, client) {
     });
     
     camera.start();
+}
+
+function setLight(msg, client) {
+    if(!config.perms.admin.includes(msg.author.id)) {
+        msg.channel.send("You don't have the require permissions do execute that command.");
+        return;
+    }
+
+    var params = msg.content.split(' ');
+    params.shift();
+    params.shift();
+
+    switch(params[0]) {
+        case "plus":
+            lights.brightnessPlus();
+            break;
+        case "minus":
+            lights.brightnessMinus();
+            break;
+        case "on":
+            lights.turnOnOff();
+            break;
+        case "off":
+            lights.turnOnOff();
+            break;
+        case "color":
+            lights.changeColor();
+            break;
+        case "white":
+            lights.setWhite();
+            break;
+        default:
+             //Todo: dynamic help
+            var body = [
+                {
+                    name:"Usage",
+                    valule: "light [command]"
+                },
+                {
+                    name: "help",
+                    value: "Display help"
+                },
+                {
+                    name: "plus",
+                    value: "Brightness +"
+                },
+                {
+                    name: "minus",
+                    value: "Brightness -"
+                },
+                {
+                    name: "on | off",
+                    value: "Turns the lights on/off"
+                },
+                {
+                    name: "color",
+                    value: "Change light color"
+                },
+                {
+                    name: "white",
+                    value: "Set the light color to white"
+                }
+            ]
+
+            msg.channel.send({
+                    embed: {
+                        title: 'Light Help',
+                        color: 3447003,
+                        description: "Help for command help",
+                        fields: body,
+                    }
+            });
+    }
+
+
 }
