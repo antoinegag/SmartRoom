@@ -7,6 +7,9 @@ port.pipe(parser); // pipe the serial stream to the parser
 
 var ready = false;
 
+/*
+* TODO: Replace this by a three-way handshake?
+*/
 port.on('data', (data) => {
     if(data.toString() === 'READY') {
       ready = true;
@@ -17,6 +20,9 @@ port.on('data', (data) => {
 
 module.exports = {
 
+  /**
+   * Sends `val` through the serial port
+   */
   send : function(val, callback) {
     if (!ready) {
       console.log("Serial com attempt when arduino wasn't ready!");
@@ -27,6 +33,9 @@ module.exports = {
     }
   },
 
+  /**
+   * Query the Arduino and call the `callback` with the data as a string
+   */
   query : function(callback) {
     if (!ready) {
       console.log("Query attempt when arduino wasn't ready!");
