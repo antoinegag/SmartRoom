@@ -98,6 +98,7 @@ float getAnalogTemp() {
  */
 float getHumidity() {
   DHT.read11(DHT11_PIN);
+  DHT.read11(DHT11_PIN);
   return DHT.humidity;
 }
 

@@ -150,28 +150,34 @@ function setLight(msg, client) {
     switch(params[0]) {
         case "plus":
             lights.brightnessPlus();
+            msg.channel.send("Ok, increased brightness.");
             break;
         case "minus":
             lights.brightnessMinus();
+            msg.channel.send("Ok, turned down the lights.");
             break;
         case "on":
             lights.turnOnOff();
+            msg.channel.send("Ok, changed light state.");
             break;
         case "off":
             lights.turnOnOff();
+            msg.channel.send("Ok, changed light state.");
             break;
         case "color":
             lights.changeColor();
+            msg.channel.send("Ok, changed light color.");
             break;
         case "white":
             lights.setWhite();
+            msg.channel.send("Ok, set light to white.");
             break;
         default:
-             //Todo: dynamic help
+            //Todo: dynamic help
             var body = [
                 {
                     name:"Usage",
-                    valule: "light [command]"
+                    value: "light [command]"
                 },
                 {
                     name: "help",
@@ -207,7 +213,5 @@ function setLight(msg, client) {
                         fields: body,
                     }
             });
-    }
-
-
+    }  
 }
