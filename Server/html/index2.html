@@ -6,42 +6,41 @@
   <title>SmartRoom Dashboard</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="/smartroom/css/normalize.css">
+  <link rel="stylesheet" href="/smartroom/css/style.css">
   <link rel="stylesheet" href="/smartroom/dist/css/asPieProgress.css">
-  <style type="text/css">
-
-    button {
-      border-style: solid;
-      border-color: rgb(198, 55, 205);
-      width: 120px;
-      height: 60px;
-      margin-bottom: 10px;
-      background-color: #181818;
-      color:white;
-    }
-    body {
-      padding: 40px;
-    }
-    .pie_progress {
-      width: 160px;
-      margin: 10px auto;
-      color:white;
-    }
-
-    @media all and (max-width: 768px) {
-      .pie_progress {
-        margin: 10px;
-        width: 50%;
-        max-width: 300px;
-        color:white;
-      }
-    }
-  </style>
 </head>
-<body bgcolor="#000000">
+<body>
+    <header class="col-12 col-m-12 col-t-12">
+        <h1><span class="purple">Smart</span>Room</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li class="col-4 col-m-12"><a class="button active" href="#">Dashboard</a></li>
+            <li class="col-4 col-m-12"><a class="button" href="#">History</a></li>
+            <li class="col-4 col-m-12"><a class="button" href="#">Admin</a></li>
+        </ul>
+    </nav>
+
+    <main>
+      <section class="col-4 col-m-12">
+        <ul>
+            <li class="col-4 button"><button id="onoff">On / Off</button></li>
+            <li class="col-4 button"><button id="white">White</button></li>
+            <li class="col-4 button"><button id="change">Color</button></li>
+            <li class="col-6 button"><button id="plus">+</button></li>
+            <li class="col-6 button"><button id="minus">-</button></li>
+        </ul>
+      </section>
+    </main>
+
   <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+  <!--
   <section>
     <section>
       <div class="row">
@@ -69,6 +68,7 @@
       </div>
     </section>
   </section>
+-->
   <script type="text/javascript" src="/smartroom/js/jquery.js"></script>
   <script type="text/javascript" src="/smartroom/dist/jquery-asPieProgress.js"></script>
   <script src="/smartroom/js/content.js"></script>
