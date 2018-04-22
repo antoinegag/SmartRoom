@@ -7,7 +7,8 @@
     "api": {
         "active": true,
         "sensors": true,
-        "lights": true
+        "lights": true,
+        "sampling" : true
     },
     "serve_static": true,
     "static_path" : "html",

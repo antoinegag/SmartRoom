@@ -17,7 +17,8 @@ if(config.stream || config.serve_static || config.api.active) {
 
   if(config.listen_on.port != 80 && config.listen_on.reroute) {
     console.log("Redirecting port 80 to " + config.listen_on.port);
-    //Oof change this
+
+    //FIXME: This is one dirty hack
     cmd.run('sudo iptables -t nat -A PREROUTING -i ' + config.listen_on.inteface + ' -p tcp --dport 80 -j REDIRECT --to-port ' + config.listen_on.port);
   }
 
@@ -40,7 +41,7 @@ if(config.stream || config.serve_static || config.api.active) {
     //Register routes for historical data
     console.log("Registering historic routes");
     var historicRoutes = require('./database/routes');
-    historicRoutes(app);
+    historicRoutes(app, config.api.sampling);
 
 
     if(config.api.sensors) {
